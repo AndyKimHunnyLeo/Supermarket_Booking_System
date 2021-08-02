@@ -2,11 +2,18 @@ package com.polarmushroom.domain.customer;
 
 import com.polarmushroom.domain.booking.Booking;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Customer {
     private Long id;
     private String name;
     private String phone;
-    private Booking[] booking;
+    private List<Booking> booking= new ArrayList<>();
+
+
+    public Customer() {
+    }
 
     public Customer(Long id, String name, String phone) {
         this.id = id;
@@ -38,13 +45,12 @@ public class Customer {
         this.phone = phone;
     }
 
-    public Booking[] getBooking() {
+    public List<Booking> getBooking() {
         return booking;
     }
 
-    public void setBooking(Booking[] booking) {
-        if(booking.length < 8){
-            this.booking = booking;
-        }
+    public void setBooking(List<Booking> booking) {
+        this.booking = booking;
     }
+
 }

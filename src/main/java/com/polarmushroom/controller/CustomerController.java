@@ -1,6 +1,6 @@
 package com.polarmushroom.controller;
 
-import com.polarmushroom.service.CustomerService;
+import com.polarmushroom.service.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CustomerController {
-    private CustomerService customerService;
+    private CustomerServiceImpl customerServiceImpl;
 
     @Autowired
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
+    public CustomerController(CustomerServiceImpl customerServiceImpl) {
+        this.customerServiceImpl = customerServiceImpl;
     }
 
     @GetMapping("home")

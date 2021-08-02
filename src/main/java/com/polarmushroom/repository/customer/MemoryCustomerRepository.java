@@ -1,6 +1,7 @@
 package com.polarmushroom.repository.customer;
 
 
+import com.polarmushroom.domain.booking.Booking;
 import com.polarmushroom.domain.customer.Customer;
 
 import java.util.HashMap;
@@ -35,7 +36,23 @@ public class MemoryCustomerRepository implements CustomerRepository {
     }
 
     @Override
+    public Booking addBooking(Booking booking) {
+        Customer customer = store.get(booking.getCustomerId());
+        customer.getBooking().add(booking);
+        store.put(booking.getCustomerId(), customer);
+        return booking;
+    }
+
+    @Override
+    public Booking deleteBooking(Booking booking) {
+        Customer customer = store.get(booking.getCustomerId());
+        customer.getBooking().remove(booking);
+        store.put(booking.getCustomerId(), customer);
+        return booking;
+    }
+    @Override
     public void clearStore() {
         store.clear();
     }
+
 }
