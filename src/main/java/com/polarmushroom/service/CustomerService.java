@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+
 public class CustomerService {
     private CustomerRepository customerRepository;
 
@@ -37,13 +37,18 @@ public class CustomerService {
     }
 
     //Get all users
-    public List<Customer> findMembers() {
+    public List<Customer> findCustomers() {
         return customerRepository.findAll();
     }
 
-    //Find a user with name
-    public Optional<Customer> findOne(Long id) {
+    //Find a user with id
+    public Optional<Customer> findWithId(Long id) {
         return customerRepository.findById(id);
+    }
+
+    //Find a user with name
+    public Optional<Customer> findWithName(String name) {
+        return customerRepository.findByName(name);
     }
 
 }

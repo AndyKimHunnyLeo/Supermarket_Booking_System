@@ -33,4 +33,9 @@ public class MemoryCustomerRepository implements CustomerRepository {
     public List<Customer> findAll() {
         return store.values().stream().collect(Collectors.toList());
     }
+
+    @Override
+    public void clearStore() {
+        store.clear();
+    }
 }

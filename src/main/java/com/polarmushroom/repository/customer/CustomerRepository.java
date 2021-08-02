@@ -14,4 +14,6 @@ public interface CustomerRepository {
     Optional<Customer> findByName(String name);
 
     List<Customer> findAll();
+
+    void clearStore();
 }

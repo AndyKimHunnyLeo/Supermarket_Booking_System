@@ -13,7 +13,7 @@ public class BookingApp {
         customerService.join(customer);
 //        customerService.join(customer2);
 
-        Customer findMember = customerService.findOne(1L).get();
+        Customer findMember = customerService.findWithId(1L).get();
         System.out.println("customer = " + customer);
         System.out.println("customer = " + customer2.getName());
 

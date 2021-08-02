@@ -10,11 +10,11 @@ import org.springframework.context.annotation.Configuration;
 public class SpringConfig {
 
     @Bean
-    public CustomerService CustomerRepository(){
-        return new CustomerService(memoryCustomerRepository());
+    public CustomerService customerService(){
+        return new CustomerService(customerRepository());
     }
     @Bean
-    public CustomerRepository memoryCustomerRepository(){
+    public CustomerRepository customerRepository(){
         return new MemoryCustomerRepository();
     }
 }
