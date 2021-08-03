@@ -12,47 +12,47 @@ import java.util.stream.Collectors;
 
 public class MemoryCustomerRepository implements CustomerRepository {
 
-    private static Map<Long, Customer> store = new HashMap<>();
+    private static Map<Long, Customer> customerStore = new HashMap<>();
 
     @Override
     public void save(Customer customer) {
-        store.put(customer.getId(), customer);
+        customerStore.put(customer.getId(), customer);
     }
 
     @Override
     public Optional<Customer> findById(Long id) {
-        return Optional.ofNullable(store.get(id));
+        return Optional.ofNullable(customerStore.get(id));
     }
 
     @Override
     public Optional<Customer> findByName(String name) {
-        return store.values().stream()
+        return customerStore.values().stream()
                 .filter(member -> member.getName().equals(name)).findAny();
     }
 
     @Override
     public List<Customer> findAll() {
-        return store.values().stream().collect(Collectors.toList());
+        return customerStore.values().stream().collect(Collectors.toList());
     }
 
     @Override
     public Booking addBooking(Booking booking) {
-        Customer customer = store.get(booking.getCustomerId());
+        Customer customer = customerStore.get(booking.getCustomerId());
         customer.getBooking().add(booking);
-        store.put(booking.getCustomerId(), customer);
+        customerStore.put(booking.getCustomerId(), customer);
         return booking;
     }
 
     @Override
     public Booking deleteBooking(Booking booking) {
-        Customer customer = store.get(booking.getCustomerId());
+        Customer customer = customerStore.get(booking.getCustomerId());
         customer.getBooking().remove(booking);
-        store.put(booking.getCustomerId(), customer);
+        customerStore.put(booking.getCustomerId(), customer);
         return booking;
     }
     @Override
     public void clearStore() {
-        store.clear();
+        customerStore.clear();
     }
 
 }

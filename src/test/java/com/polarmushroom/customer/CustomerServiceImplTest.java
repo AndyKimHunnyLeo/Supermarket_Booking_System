@@ -51,7 +51,7 @@ public class CustomerServiceImplTest {
 
         IllegalStateException e = assertThrows(IllegalStateException.class,
                 () -> customerServiceImpl.join(customer2));//should throw an error
-        assertThat(e.getMessage()).isEqualTo("Name can not be same");
+        assertThat(e.getMessage()).isEqualTo("Name can not be same.");
     }
 
     @Test
@@ -80,6 +80,24 @@ public class CustomerServiceImplTest {
         //Then
         Customer findCustomer = customerServiceImpl.findWithId(1L).get();
         assertEquals(true, findCustomer.getBooking().contains(booking));
+    }
+    @Test
+    void addBookingValidation(){
+        //Given
+        Customer customer = new Customer(1L, "memberA","022-350-6196");
+        Booking booking1 = new Booking(1L, 2, Days.THURSDAY);
+        Booking booking2 = new Booking(1L, 2, Days.THURSDAY);
+
+
+        //When
+        customerServiceImpl.join(customer);
+        customerServiceImpl.addBooking(booking1);
+
+
+        //Then
+        IllegalStateException e = assertThrows(IllegalStateException.class,
+                () -> customerServiceImpl.addBooking(booking2));//should throw an error
+        assertThat(e.getMessage()).isEqualTo("You can't book same day twice.");
     }
 
     @Test

@@ -9,7 +9,7 @@ public class Customer {
     private Long id;
     private String name;
     private String phone;
-    private List<Booking> booking= new ArrayList<>();
+    private List<Booking> booking= new ArrayList<>(7);
 
 
     public Customer() {

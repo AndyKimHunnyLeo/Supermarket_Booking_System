@@ -1,6 +1,7 @@
 package com.polarmushroom.service;
 
 import com.polarmushroom.domain.booking.Booking;
+import com.polarmushroom.domain.booking.Days;
 import com.polarmushroom.domain.customer.Customer;
 import com.polarmushroom.repository.customer.CustomerRepository;
 import com.polarmushroom.repository.customer.MemoryCustomerRepository;
@@ -36,7 +37,7 @@ public class CustomerServiceImpl implements CustomerService {
     private void validateMemberName(Customer customer) {
         customerRepository.findByName(customer.getName()).ifPresent(member1 ->
         {
-            throw new IllegalStateException("Name can not be same");
+            throw new IllegalStateException("Name can not be same.");
         });
     }
 
@@ -60,7 +61,22 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Booking addBooking(Booking booking) {
-        return customerRepository.addBooking(booking);
+        Customer customer = customerRepository.findById(booking.getCustomerId()).get();
+        Boolean duplicateBooking = false;
+        for(Booking bookingInfo : customer.getBooking()){
+            if(bookingInfo.getDays() == booking.getDays()){
+                duplicateBooking = true;
+            }
+        }
+
+        if(!duplicateBooking){
+            customerRepository.addBooking(booking);
+            return booking;
+        }else {
+            throw new IllegalStateException("You can't book same day twice.");
+        }
+
+
     }
 
     @Override
